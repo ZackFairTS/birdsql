@@ -12,6 +12,18 @@ birdsql/
 │   ├── install.sh                  # 环境安装脚本
 │   ├── serve.sh                    # 服务启动脚本
 │   └── test.sh                     # 推理测试脚本
+├── src/                            # 核心代码
+│   ├── schema_extractor.py         # SQLite schema 提取
+│   ├── prompt_builder.py           # Prompt 模板构建
+│   ├── sql_parser.py               # SQL 提取与解析
+│   └── evaluation.py               # EX 指标评测
+├── scripts/                        # 运行脚本
+│   ├── download_data.sh            # 下载 BIRD 数据集
+│   ├── run_inference.py            # 推理主脚本
+│   ├── run_evaluation.py           # 评测主脚本
+│   └── run_baseline.sh             # 端到端一键运行
+├── data/                           # BIRD 数据（需下载）
+├── results/                        # 评测结果输出
 └── qwen3.5_sql_test.txt            # 推理测试结果样例
 ```
 
@@ -63,6 +75,37 @@ curl http://localhost:8000/v1/chat/completions \
     "max_tokens": 2048
   }'
 ```
+
+## BIRD Benchmark Baseline
+
+### 结果
+
+| 难度 | 正确 | 总数 | EX (%) |
+|------|------|------|--------|
+| simple | 633 | 925 | 68.43% |
+| moderate | 233 | 464 | 50.22% |
+| challenging | 75 | 145 | 51.72% |
+| **ALL** | **941** | **1534** | **61.34%** |
+
+### 运行 Baseline
+
+```bash
+# 一键运行（数据下载 + 推理 + 评测）
+bash scripts/run_baseline.sh
+
+# 或分步运行
+bash scripts/download_data.sh              # 下载 BIRD 数据集
+python scripts/run_inference.py             # 推理（~45 分钟）
+python scripts/run_evaluation.py            # 评测
+```
+
+### 评测配置
+
+- Prompt：System prompt + Schema (DDL + 3 sample rows) + Evidence + Question
+- Temperature: 0
+- Max tokens: 4096
+- 并发数: 8
+- 评测指标: Execution Accuracy (EX)
 
 ## 部署说明
 

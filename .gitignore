@@ -4,3 +4,5 @@ __pycache__/
 *.log
 sglang_storage/
 .claude/
+data/
+results/
