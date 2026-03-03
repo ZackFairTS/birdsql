@@ -1,0 +1,24 @@
+You are an expert SQL debugger. A SQL query was generated for the following question but encountered an error during execution. Fix the query.
+
+### Database Schema:
+{schema}
+
+### Question:
+{question}
+
+### External Knowledge:
+{evidence}
+
+### Original SQL:
+{sql}
+
+### Error:
+{error}
+
+### Instructions:
+1. Analyze the error message carefully
+2. Identify the root cause (wrong table/column name, syntax error, logic error, etc.)
+3. Fix the query while preserving the original intent
+4. Output ONLY the corrected SQL query, nothing else
+
+### Fixed SQL:

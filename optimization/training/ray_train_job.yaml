@@ -1,0 +1,66 @@
+# Ray Job configuration for training the pairwise SQL selector on EKS
+# Cluster: eks-ray-cluster (ap-northeast-1), Ray 2.46.0, 7 nodes
+#
+# Usage:
+#   # Port-forward Ray dashboard
+#   kubectl port-forward svc/raycluster-head-svc 8265:8265 -n ray
+#
+#   # Submit job
+#   ray job submit --address http://localhost:8265 \
+#     --working-dir optimization/training \
+#     --runtime-env-json '{"pip": ["peft>=0.14.0", "transformers>=4.48.0", "datasets>=3.0.0", "torch>=2.4.0", "accelerate>=1.2.0"]}' \
+#     -- python train_selector.py \
+#       --train_data /tmp/selector_data_train.json \
+#       --val_data /tmp/selector_data_val.json \
+#       --output_dir /tmp/selector_model \
+#       --base_model Qwen/Qwen2.5-1.5B-Instruct \
+#       --lora_rank 16 \
+#       --epochs 10 \
+#       --batch_size 8
+
+# Alternative: RayJob CRD for Kubernetes
+apiVersion: ray.io/v1
+kind: RayJob
+metadata:
+  name: birdsql-selector-training
+  namespace: ray
+spec:
+  entrypoint: >
+    python train_selector.py
+    --train_data /tmp/selector_data_train.json
+    --val_data /tmp/selector_data_val.json
+    --output_dir /tmp/selector_model
+    --base_model Qwen/Qwen2.5-1.5B-Instruct
+    --lora_rank 16
+    --epochs 10
+    --batch_size 8
+  runtimeEnvYAML: |
+    pip:
+      - peft>=0.14.0
+      - transformers>=4.48.0
+      - datasets>=3.0.0
+      - torch>=2.4.0
+      - accelerate>=1.2.0
+    working_dir: "."
+  shutdownAfterJobFinishes: true
+  ttlSecondsAfterFinished: 3600
+  rayClusterSpec:
+    rayVersion: '2.46.0'
+    headGroupSpec:
+      rayStartParams:
+        dashboard-host: '0.0.0.0'
+      template:
+        spec:
+          containers:
+            - name: ray-head
+              image: rayproject/ray-ml:2.46.0-py310-gpu
+              resources:
+                requests:
+                  cpu: "4"
+                  memory: "16Gi"
+                  nvidia.com/gpu: "1"
+                limits:
+                  cpu: "4"
+                  memory: "16Gi"
+                  nvidia.com/gpu: "1"
+    workerGroupSpecs: []

@@ -1,0 +1,31 @@
+You are an expert SQL assistant. Your task is to generate a SQLite query by decomposing the question into sub-problems.
+
+Follow this step-by-step approach:
+
+1. **Understand the Question**: Identify what the question is asking for (the target columns/aggregations).
+
+2. **Decompose into Sub-Problems**: Break the question into smaller, manageable sub-questions. Each sub-question should correspond to a part of the final SQL query (e.g., a subquery, a JOIN, a filter condition).
+
+3. **Solve Each Sub-Problem**: For each sub-question, write the corresponding SQL fragment.
+
+4. **Assemble the Final Query**: Combine all SQL fragments into a complete, correct SQLite query.
+
+5. **Verify and Optimize**: Check that the assembled query:
+   - Uses correct table and column names from the schema
+   - Has proper JOIN conditions
+   - Handles NULL values appropriately
+   - Returns the expected result format
+
+### Database Schema:
+{schema}
+
+{value_hint}
+### External Knowledge:
+{evidence}
+
+### Question:
+{question}
+
+Now decompose and solve step by step:
+
+**Sub-problems:**

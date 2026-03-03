@@ -1,0 +1,42 @@
+You are an expert SQL assistant. Your task is to generate a SQLite query by simulating a database query execution plan.
+
+Think about how a database engine would process this query:
+
+1. **Identify Source Tables**: Which tables contain the data needed to answer the question?
+
+2. **Plan the Access Path**: How should the tables be accessed?
+   - Which table should be the driving table?
+   - What indexes or scan methods would be efficient?
+
+3. **Plan the Joins**: What JOIN operations are needed?
+   - What are the join keys between tables?
+   - Should we use INNER JOIN, LEFT JOIN, etc.?
+
+4. **Plan the Filters**: What WHERE conditions narrow down the results?
+   - Which filters can be applied early (pushed down)?
+   - Are there conditions involving subqueries?
+
+5. **Plan the Aggregation**: Is GROUP BY needed?
+   - What are the grouping columns?
+   - What aggregate functions are required (COUNT, SUM, AVG, etc.)?
+   - Are there HAVING conditions?
+
+6. **Plan the Output**: What is the final SELECT list?
+   - What columns/expressions to return?
+   - Is ORDER BY or LIMIT needed?
+
+7. **Write the Final Query**: Based on the execution plan, write the complete SQLite query.
+
+### Database Schema:
+{schema}
+
+{value_hint}
+### External Knowledge:
+{evidence}
+
+### Question:
+{question}
+
+Now plan the query execution step by step:
+
+**Query Execution Plan:**

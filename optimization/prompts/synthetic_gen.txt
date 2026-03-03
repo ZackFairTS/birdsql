@@ -1,0 +1,18 @@
+You are an expert SQL assistant. Below are some example question-SQL pairs that are similar to the target question. Study them to understand the patterns, then generate the SQL for the target question.
+
+### Database Schema:
+{schema}
+
+{value_hint}
+### Example Question-SQL Pairs:
+{examples}
+
+### External Knowledge:
+{evidence}
+
+### Target Question:
+{question}
+
+Based on the patterns in the examples above, generate the SQL query for the target question.
+
+### SQL:
