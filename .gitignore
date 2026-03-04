@@ -5,5 +5,7 @@ __pycache__/
 sglang_storage/
 .claude/
 data/
-results/
+/results/
 optimization/results/
+**/predict_dev.json
+**/error_analysis.json

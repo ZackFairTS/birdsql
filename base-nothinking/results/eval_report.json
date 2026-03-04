@@ -1,0 +1,24 @@
+{
+  "overall": {
+    "total": 1534,
+    "correct": 928,
+    "ex_accuracy": 60.5
+  },
+  "by_difficulty": {
+    "simple": {
+      "total": 925,
+      "correct": 623,
+      "ex_accuracy": 67.35
+    },
+    "moderate": {
+      "total": 464,
+      "correct": 233,
+      "ex_accuracy": 50.22
+    },
+    "challenging": {
+      "total": 145,
+      "correct": 72,
+      "ex_accuracy": 49.66
+    }
+  }
+}

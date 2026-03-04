@@ -1,0 +1,15 @@
+BIRD Benchmark Evaluation Results
+============================================================
+
+Model: Qwen3.5-35B-A3B-FP8
+Predictions: op1-mschema/results/predict_dev.json
+
+Overall EX Accuracy: 60.04%  (921/1534)
+
+Difficulty       Correct    Total   EX (%)
+---------------------------------------------
+simple               615      925   66.49%
+moderate             238      464   51.29%
+challenging           68      145   46.90%
+---------------------------------------------
+ALL                  921     1534   60.04%

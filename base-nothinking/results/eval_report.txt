@@ -1,0 +1,15 @@
+BIRD Benchmark Evaluation Results
+============================================================
+
+Model: Qwen3.5-35B-A3B-FP8
+Predictions: base-nothinking/results/predict_dev.json
+
+Overall EX Accuracy: 60.5%  (928/1534)
+
+Difficulty       Correct    Total   EX (%)
+---------------------------------------------
+simple               623      925   67.35%
+moderate             233      464   50.22%
+challenging           72      145   49.66%
+---------------------------------------------
+ALL                  928     1534   60.50%
